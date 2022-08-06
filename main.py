@@ -48,11 +48,12 @@ while True:
              for i in  data:
               i=list(i)     
               if i[6]==pin: 
+                print("Welcome",i[1],"!!")
                 amount=int(input("Enter the Amount you want to Deposit:- "))
                 i[5]+=amount
                 try:
                     type='deposit'
-                    db.Deposist(pin,amount,i[0],type)
+                    db.Deposist(pin,amount,i[0],type,i[5],i[1])
                     print("Amount Deposisted sucessfully")
                     print("Your current balance is:-",i[5])
                     print("Thankyou")
@@ -67,6 +68,7 @@ while True:
              for i in data:
                 i=list(i)
                 if i[6]==pin:
+                 print("Welcome",i[1],"!!")
                  print("Note:- Account should have minimum Rs5000")
                  amount=int(input("Enter the amount to withdrawn:- "))
                  try:
@@ -79,7 +81,7 @@ while True:
                     if i[5]-amount>=5000:
                      i[5]-=amount
                      type='withdrawn'
-                     db.Withdrawn(pin,amount,i[0],type)
+                     db.Withdrawn(pin,amount,i[0],type,i[5],i[1])
                      print("Money Withdrawn Successfully")
                      print("Your current balance is:-", i[5])
                      print("Thankyou")
@@ -99,14 +101,17 @@ while True:
 
             elif Action==4:
                 continue
+            else:
+                print("Invalid option")
             
         
         elif Choice==3:
             data = db.showtransaction()
             for i in data:
-             print(f'Accno: {i[0]} Amount: {i[1]} Type: {i[2]}')
+             print(f'Accno: {i[0]} Amount: {i[1]} Type: {i[2]}  Balance: {i[3]} Name: {i[5]}')
 
         elif Choice==4:
+            print("Warning your account will be deleted permanently!!!")
             pin=int(input("Enter the secret pin to access the account:- "))
             data=db.showcustomer()
             for i in data:
