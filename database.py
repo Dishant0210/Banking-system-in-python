@@ -35,19 +35,19 @@ def Create( accno,name,city,contact,adhaarcard,pin,balance):
     con.commit()
     dbdisconnect()
 
-def Deposist(pin,amount,accno,type):
+def Deposist(pin,amount,accno,type,balance,name):
     dbconnect()
     query1=f'update customer set balance=balance+{amount} where pin={pin}'
-    query2=f'insert into transaction(accno,amount,type) values({accno},{amount},"{type}")'
+    query2=f'insert into transaction(accno,amount,type,balance,name) values({accno},{amount},"{type}",{balance},"{name}")'
     cur.execute(query1)
     cur.execute(query2)
     con.commit()
     dbdisconnect()
 
-def Withdrawn(pin,amount,accno,type):
+def Withdrawn(pin,amount,accno,type,balance,name):
     dbconnect()
     query1=f'update customer set balance=balance-{amount} where pin={pin}'
-    query2=f'insert into transaction(accno,amount,type) values({accno},{amount},"{type}")'
+    query2=f'insert into transaction(accno,amount,type,balance,name) values({accno},{amount},"{type}",{balance},"{name}")'
 
     cur.execute(query1)
     cur.execute(query2)
